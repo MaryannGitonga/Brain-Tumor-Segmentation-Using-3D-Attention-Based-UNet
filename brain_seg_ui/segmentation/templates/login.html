@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class = 'form-wrapper'>
+        <div class = 'logo'>
+            <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>        </div>
+        {% for message in get_flasked_messages %}
+            <div class = 'alert alert-warning'>
+                <button type = 'button' class = 'close' data-dismiss = 'alert'>
+                    x
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h1>Log In</h1>
+
+        <form method = 'POST' action = '/login'>
+            {{ form.csrf_token }}
+
+            <fieldset class = 'medical_id'>
+                {{ form.medical_id.label }}    
+                {{ form.medical_id(placeholder = '1234567') }}
+                {% if form.medical_id.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.medical_id.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'password'>
+                {{ form.password.label }} 
+                {{ form.password }}   
+                {% if form.password.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <div class = 'submit-button'>
+                {{ form.submit }}
+            </div>
+        </form>
+
+        <div class = 'login-signup'>
+            <div>
+                <span>Don't have an account?</span>
+                <a href = {{ url_for('auth_bp.signup') }}>Sign Up.</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}   
+

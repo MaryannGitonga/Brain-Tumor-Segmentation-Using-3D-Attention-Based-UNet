@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{ title }}</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#5eb9d7" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='dist/img/favicon.png') }}"
+      type="image/x-icon"
+    />
+    <meta
+      property="og:description"
+      content="Add user authentication to your Flask app."
+    />
+    <meta name="twitter:title" content="{{ title }}" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:200,300,500"
+      rel="stylesheet"
+    />
+    {% block pagestyles %}{% endblock %}
+  </head>
+
+  <body class="{{ template }}">
+    <div class="container">
+      {% include 'nav.html' %} {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('main_bp.static', filename='dist/js/main.min.js') }}"></script>
+    {% block additionalscripts %}{% endblock %}
+  </body>
+</html>
