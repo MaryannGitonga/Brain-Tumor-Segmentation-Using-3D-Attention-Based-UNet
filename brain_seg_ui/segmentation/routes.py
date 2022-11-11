@@ -162,6 +162,7 @@ def upload_scans():
         title="Upload Scans",
         form = form,
         template = 'signup-page',
+        neur = Roles.neurologist,
     )
 
 @main_bp.route('/view_patients', methods=['GET'])
@@ -173,7 +174,9 @@ def view_patients():
         'patients.html',
         template = 'dashboard-page',
         patients = patients,
-        body = 'View Patients'
+        body = 'View Patients',
+        neur = Roles.neurologist,
+
     )
 
 @main_bp.route('/view_scans/<patient_ID>', methods=['GET'])
@@ -196,7 +199,8 @@ def view_scans(patient_ID):
         return render_template('scans.html',
                             scans = scans_list,
                             template = 'dashboard-page',
-                            body = 'Scans for: ' + ' ' +  str(patient.medical_id) + ' - ' + patient.first_name + ' ' + patient.last_name
+                            body = 'Scans for: ' + ' ' +  str(patient.medical_id) + ' - ' + patient.first_name + ' ' + patient.last_name,
+                            neur = Roles.neurologist,
                             )
     return redirect('main_bp.view_patients')
 
