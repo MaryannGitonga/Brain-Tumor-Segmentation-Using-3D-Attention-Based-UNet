@@ -22,6 +22,7 @@
       <td>{{ patient.medical_id }}</td>
       <td>{{ patient.first_name + ' ' + patient.last_name }}</td>
       <td>
+        {% if patient.scans %}
         <a
           href="{{ url_for('main_bp.view_scans', patient_ID=patient.id) }}"
           style="
@@ -33,6 +34,7 @@
           "
           >View Scans</a
         >
+        {% else %} No scans segmented yet {% endif %}
       </td>
     </tr>
     {% endfor %}
