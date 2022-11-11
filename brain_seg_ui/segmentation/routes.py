@@ -164,6 +164,42 @@ def upload_scans():
         template = 'signup-page',
     )
 
+@main_bp.route('/view_patients', methods=['GET'])
+@login_required
+def view_patients():
+    patients = db.session.query(User).filter(User.role == None)
+        
+    return render_template(
+        'patients.html',
+        template = 'dashboard-page',
+        patients = patients,
+        body = 'View Patients'
+    )
+
+@main_bp.route('/view_scans/<patient_ID>', methods=['GET'])
+@login_required
+def view_scans(patient_ID):
+    scans_list = list()
+    print("Patient ID: ", patient_ID)
+    scans = db.session.query(Scan).filter_by(patient_id = patient_ID)
+    
+    patient = db.session.query(User).filter_by(id = patient_ID).first()
+    
+    if scans.count() > 0:
+        for i in range(scans.count() - 1):
+            scans_list.append({
+                'scan': scans[i].scan_file,
+                'predicted': scans[i + 1].scan_file,
+                'created_on' : scans[i].created_on.date()
+            })
+            
+        return render_template('scans.html',
+                            scans = scans_list,
+                            template = 'dashboard-page',
+                            body = 'Scans for: ' + ' ' +  str(patient.medical_id) + ' - ' + patient.first_name + ' ' + patient.last_name
+                            )
+    return redirect('main_bp.view_patients')
+
 @main_bp.route("/logout")
 @login_required
 def logout():

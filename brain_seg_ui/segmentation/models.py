@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_login import UserMixin
 # import sqlalchemy as db
 from . import db
@@ -54,6 +55,8 @@ class User(UserMixin, db.Model):
         nullable = False
     )
     
+    scans = db.relationship("Scan", backref='users', lazy = True)
+    
     created_on = db.Column(
         db.DateTime,
         index = False,
@@ -93,7 +96,11 @@ class Scan(db.Model):
         nullable = False
     )
     
-    patient_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_on = db.Column(
+        db.DateTime,
+        index = False,
+        unique = False,
+        default = datetime.now()
+    )
     
-    patient = db.relationship("User")
-    
+    patient_id = db.Column(db.Integer, db.ForeignKey('users.id'))    

@@ -16,7 +16,7 @@
       <a href="">Home</a>
       <a href="{{ url_for('main_bp.upload_scans') }}">Upload Scans</a>
       {% if current_user.role == neur %}
-      <a href="">View Patient Results</a>
+      <a href="{{ url_for('main_bp.view_patients') }}">View Patient Results</a>
       {% endif %}
     </span>
     <span id="right">

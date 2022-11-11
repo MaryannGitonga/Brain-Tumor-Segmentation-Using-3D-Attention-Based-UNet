@@ -1,0 +1,42 @@
+{% extends "layout.html" %} {% block pagestyles %}
+<link
+  href="{{ url_for('static', filename='dist/css/dashboard.css') }}"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css" />
+{% endblock %} {% block content %}
+<h1>{{ body }}</h1>
+
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Patient ID</th>
+      <th>Patient Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for patient in patients %}
+    <tr>
+      <td>{{ patient.medical_id }}</td>
+      <td>{{ patient.first_name + ' ' + patient.last_name }}</td>
+      <td>
+        <a
+          href="{{ url_for('main_bp.view_scans', patient_ID=patient.id) }}"
+          style="
+            text-decoration: none;
+            background-color: #344372;
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 6%;
+          "
+          >View Scans</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

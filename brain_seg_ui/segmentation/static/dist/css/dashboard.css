@@ -71,3 +71,53 @@ h1 {
 #right {
     float: right;
 }
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 1000px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-weight: bold;
+    color: #344372;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #344372;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #344372;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.img-container {
+    float: left;
+    width: 45%;
+    padding: 5px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
