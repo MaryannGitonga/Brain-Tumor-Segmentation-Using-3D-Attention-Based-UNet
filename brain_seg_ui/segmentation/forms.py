@@ -8,6 +8,8 @@ from wtforms.validators import (
     Optional
 )
 
+from .models import db, User
+
 class SignupForm(FlaskForm):
     
     medical_id = IntegerField(
@@ -76,10 +78,26 @@ class LoginForm(FlaskForm):
     )
     
     submit = SubmitField('Log In')
-    
-    
 
 class UploadScansForm(FlaskForm):
+    def getPatients():
+        patients_list = list()
+        patients = db.session.query(User).filter(User.role == None)
+        
+        for patient in patients:
+            patients_list.append((
+                patient.id, 
+                str(patient.medical_id) + ' - ' + patient.first_name + ' ' + patient.last_name
+                ))
+            
+        return patients_list
+    
+    patient = SelectField(
+        'Patient',
+        validators=[DataRequired()],
+        choices=getPatients()
+    )
+    
     flair_scan = FileField(
         'Flair Scan',
         validators=[DataRequired()]

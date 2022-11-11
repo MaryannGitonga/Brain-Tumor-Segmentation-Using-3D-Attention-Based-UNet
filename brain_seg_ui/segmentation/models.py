@@ -93,3 +93,7 @@ class Scan(db.Model):
         nullable = False
     )
     
+    patient_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    patient = db.relationship("User")
+    

@@ -20,8 +20,20 @@
 
         <h1>Upload Scans</h1>
 
-        <form method = 'POST' action = '/upload_scans'>
+        <form method = 'POST' action = '/upload_scans' enctype="multipart/form-data">
             {{ form.csrf_token }}
+
+            <fieldset class = 'patient'>
+                {{ form.patient.label }}    
+                {{ form.patient }}
+                {% if form.patient.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.patient.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
 
             <fieldset class = 'flair_scan'>
                 {{ form.flair_scan.label }}    
