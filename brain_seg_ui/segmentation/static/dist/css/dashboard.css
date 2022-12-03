@@ -70,6 +70,7 @@ h1 {
 
 #right {
     float: right;
+    margin-top: 18px;
 }
 
 .styled-table {
@@ -112,7 +113,7 @@ h1 {
 
 .img-container {
     float: left;
-    width: 45%;
+    width: 50%;
     padding: 5px;
 }
 
@@ -120,4 +121,36 @@ h1 {
     content: "";
     clear: both;
     display: table;
+}
+
+
+/* Scans Key */
+
+.key {
+    position: relative;
+    float: left;
+    width: 30%;
+    padding: 5px;
+}
+
+.key:before {
+    position: absolute;
+    left: -30px;
+    content: "";
+    height: 30px;
+    width: 30px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+}
+
+.key.yellow:before {
+    background-color: #fde724;
+}
+
+.key.green:before {
+    background-color: #35b778;
+}
+
+.key.blue:before {
+    background-color: #30678d;
 }

@@ -13,7 +13,6 @@
         src="{{ url_for('static', filename='dist/img/logo.png') }}"
         alt="logo"
       />
-      <a href="">Home</a>
       <a href="{{ url_for('main_bp.upload_scans') }}">Upload Scans</a>
       {% if current_user.role == neur %}
       <a href="{{ url_for('main_bp.view_patients') }}">View Patient Results</a>

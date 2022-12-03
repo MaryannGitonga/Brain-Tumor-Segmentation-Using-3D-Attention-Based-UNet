@@ -15,7 +15,7 @@ from os.path import join, dirname, realpath
 
 SCANS_PATH = join(dirname(realpath(__file__)), 'static/scans/')
 PREDICTED_PATH = join(dirname(realpath(__file__)), 'static/predicted/')
-MODEL_PATH = join(dirname(realpath(__file__)), './attention_unet_85')
+MODEL_PATH = join(dirname(realpath(__file__)), './trial_4attention_unet_3d')
 
 # Blueprint Configuration
 main_bp = Blueprint(
@@ -115,11 +115,11 @@ def upload_scans():
         #     with sess.as_default:
         
         my_model = tf.keras.models.load_model(MODEL_PATH, compile=False)
-        print(my_model.summary())
+        
         test_prediction = my_model.predict(test_scan_input)
         test_prediction_argmax = np.argmax(test_prediction, axis = 4)[0, :, :, :]    
         
-        n_slice = 55
+        n_slice = 40
         rand_num = str(random.randint(100, 999))
         file_path = rand_num + '.png'
         
@@ -138,6 +138,8 @@ def upload_scans():
         db.session.add(combined_scan)
         db.session.commit()
         
+        print('Classes in prediction************ ', np.unique(test_prediction))
+        print('Classes in argmax************ ', np.unique(test_prediction_argmax))
         plt.clf()
         plt.figure(figsize=(8,8))
         plt.plot(231)

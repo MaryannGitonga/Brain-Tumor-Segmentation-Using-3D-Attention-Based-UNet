@@ -6,6 +6,13 @@ __pycache__
 .idea
 .webassets-cache
 
+# Scans directories
+segmentation/static/predicted
+segmentation/static/scans
+
+# trained model
+segmentation/trial_4attention_unet_3d
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
