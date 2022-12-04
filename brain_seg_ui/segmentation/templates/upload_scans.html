@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block pagestyles %}
+<link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css" />
+  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class = 'form-wrapper' style="margin-top: 40px; width: 600px;">
+        <div class = 'logo'>
+            <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>
+        </div>
+        {% for message in get_flasked_messages %}
+            <div class = 'alert alert-warning'>
+                <button type = 'button' class = 'close' data-dismiss = 'alert'>
+                    x
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h1>Upload Scans</h1>
+
+        <form method = 'POST' action = '/upload_scans' enctype="multipart/form-data">
+            {{ form.csrf_token }}
+
+            <fieldset class = 'patient'>
+                {{ form.patient.label }}    
+                {{ form.patient }}
+                {% if form.patient.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.patient.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'flair_scan'>
+                {{ form.flair_scan.label }}    
+                {{ form.flair_scan(placeholder = 'FLAIR Scan') }}
+                {% if form.flair_scan.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.flair_scan.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 't1ce_scan'>
+                {{ form.t1ce_scan.label }}    
+                {{ form.t1ce_scan(placeholder = 'T1CE Scan') }}
+                {% if form.t1ce_scan.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.t1ce_scan.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 't2_scan'>
+                {{ form.t2_scan.label }}    
+                {{ form.t2_scan(placeholder = 'T2 Scan') }}
+                {% if form.t2_scan.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.t2_scan.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <div class = 'submit-button'>
+                {{ form.submit }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

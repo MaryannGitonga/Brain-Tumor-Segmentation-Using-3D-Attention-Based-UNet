@@ -1,0 +1,27 @@
+{% if current_user.is_authenticated %}
+<header>
+  <nav>
+    <span id="left">
+      <img
+        style="
+          width: 5%;
+          height: 5%;
+          margin-right: 40px;
+          margin-left: -20px;
+          margin-bottom: -20px;
+        "
+        src="{{ url_for('static', filename='dist/img/logo.png') }}"
+        alt="logo"
+      />
+      <a href="{{ url_for('main_bp.upload_scans') }}">Upload Scans</a>
+      {% if current_user.role == neur %}
+      <a href="{{ url_for('main_bp.view_patients') }}">View Patient Results</a>
+      {% endif %}
+    </span>
+    <span id="right">
+      <a href="">{{ current_user.first_name + ' ' + current_user.last_name}}</a>
+      <a href="{{ url_for('main_bp.logout') }}">Log out</a>
+    </span>
+  </nav>
+</header>
+{% endif %}

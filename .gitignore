@@ -1,0 +1,4 @@
+brain_seg_ui/env/
+.env
+.vscode
+brain_seg_ui/segmentation/attention_unet_85/

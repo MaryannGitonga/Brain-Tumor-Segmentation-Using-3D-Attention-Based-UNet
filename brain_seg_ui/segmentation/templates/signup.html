@@ -1,0 +1,134 @@
+{% extends 'layout.html' %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class = 'form-wrapper'>
+        <div class = 'logo'>
+            <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>
+        </div>
+        {% for message in get_flasked_messages %}
+            <div class = 'alert alert-warning'>
+                <button type = 'button' class = 'close' data-dismiss = 'alert'>
+                    x
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h1>Sign Up</h1>
+
+        <form method = 'POST' action = '/signup'>
+            {{ form.csrf_token }}
+
+            <fieldset class = 'medical_id'>
+                {{ form.medical_id.label }}    
+                {{ form.medical_id(placeholder = '1234567') }}
+                {% if form.medical_id.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.medical_id.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'first_name'>
+                {{ form.first_name.label }}    
+                {{ form.first_name(placeholder = 'John') }}
+                {% if form.first_name.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.first_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'last_name'>
+                {{ form.last_name.label }}    
+                {{ form.last_name(placeholder = 'Smith') }}
+                {% if form.last_name.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.last_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'phone_no'>
+                {{ form.phone_no.label }}    
+                {{ form.phone_no(placeholder = '0712345678') }}
+                {% if form.phone_no.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.phone_no.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'email'>
+                {{ form.email.label }}    
+                {{ form.email(placeholder = 'youremail@example.com') }}
+                {% if form.email.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'role'>
+                {{ form.role.label }}    
+                {{ form.role }}    
+                {% if form.role.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.role.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'password'>
+                {{ form.password.label }}  
+                {{ form.password }}     
+                {% if form.password.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <fieldset class = 'confirm'>
+                {{ form.confirm.label }}  
+                {{ form.confirm }}
+                {% if form.confirm.errors %}
+                    <ul class = 'errors'>
+                        {% for error in form.confirm.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            <fieldset>
+
+            <div class = 'submit-button'>
+                {{ form.submit }}
+            </div>
+        </form>
+
+        <div class = 'login-signup'>
+            <div>
+                <span>Already have an account?</span>
+                <a href = {{ url_for('auth_bp.login') }}>Log in.</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %} {% block pagestyles %}
+<link
+  href="{{ url_for('static', filename='dist/css/dashboard.css') }}"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css" />
+{% endblock %} {% block content %}
+
+<h1>{{ body }}</h1>
+
+<div class="clearfix">
+  <h4>Tumor Regions:</h4>
+  <div style="margin-left: 30px" class="key blue">=> Necrotic tumor</div>
+  <div class="key yellow">=> Edema (invaded tissue)</div>
+  <div class="key green">=> Enhancing tumor</div>
+</div>
+
+<div class="clearfix">
+  {% for scan in scans %}
+  <h2>For {{ scan.created_on }}:</h2>
+  <div class="img-container">
+    <img
+      src="{{ url_for('static', filename=scan.scan) }}"
+      alt="Italy"
+      style="width: 100%"
+    />
+  </div>
+  <div class="img-container">
+    <img
+      src="{{ url_for('static', filename=scan.predicted) }}"
+      alt="Forest"
+      style="width: 100%"
+    />
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
