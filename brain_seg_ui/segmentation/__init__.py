@@ -30,5 +30,4 @@ def create_app():
         # Compile static assets
         if app.config["FLASK_ENV"] == "development":
             compile_static_assets(app)
-
         return app

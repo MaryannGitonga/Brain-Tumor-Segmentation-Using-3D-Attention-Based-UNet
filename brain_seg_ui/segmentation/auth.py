@@ -16,6 +16,8 @@ from flask_login import (
 from .models import db, User
 from . import login_manager
 
+from .utils import util_create_user
+
 auth_bp = Blueprint(
     'auth_bp', __name__,
     template_folder='templates',
@@ -55,23 +57,11 @@ def signup():
         existing_user = User.query.filter_by(medical_id = form.medical_id.data).first()
         
         if existing_user is None:
-            user = User(
-                medical_id = form.medical_id.data,
-                first_name = form.first_name.data,
-                last_name = form.last_name.data,
-                phone_no = form.phone_no.data,
-                email = form.email.data,
-                role = Roles[form.role.data],
-            )
-            
-            user.set_password(form.password.data)
-            db.session.add(user)
-            db.session.commit()
-            print('User: ', user.medical_id)
-            login_user(user)
-            return redirect(url_for('main_bp.home'))
-
-        flash('A user already exists with that email address')
+            user = util_create_user(form)
+            if user:
+                print('User: ', user.medical_id)
+                login_user(user)
+                return redirect(url_for('main_bp.home'))
     
     return render_template(
         'signup.html',
